@@ -1,0 +1,11 @@
+package bg.tu_varna.sit.f24621646.project_oop1;
+
+public class ExitCommand implements Command {
+
+    @Override
+    public void execute(String[] args) {
+    System.out.println("Exiting the program...");
+    System.exit(0);
+    }
+
+}
