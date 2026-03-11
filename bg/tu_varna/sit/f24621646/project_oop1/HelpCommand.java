@@ -4,7 +4,7 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-    System.out.println("description of commands here");
+        System.out.println("description of commands here");
     
     }
 

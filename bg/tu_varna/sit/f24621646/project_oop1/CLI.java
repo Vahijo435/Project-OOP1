@@ -18,19 +18,17 @@ private final Map<String, Command> commands=new HashMap<>();
         while(isRunning && scanner.hasNextLine()){
             String line = scanner.nextLine().trim();
             if (!line.isEmpty()){
-            String[] sp = line.split("\\s+");
-            Command cmd = commands.get(sp[0].toLowerCase());
-            String[] args=new String[sp.length-1];
-            for(int i=1;i<sp.length;i++){
-                args[i-1]=sp[i];
-            }
-            if(cmd != null){
-             if (sp[0].equalsIgnoreCase("exit")) isRunning = false; 
-             cmd.execute(args);
-            }
+                String[] sp = line.split("\\s+");
+                Command cmd = commands.get(sp[0].toLowerCase());
+                String[] args=new String[sp.length-1];
+                for(int i=1;i<sp.length;i++) args[i-1]=sp[i];
+                if(cmd != null){
+                    if (sp[0].equalsIgnoreCase("exit")) isRunning = false; 
+                    cmd.execute(args);
+                }
             else System.out.println("Непозната команда: " + sp[0]);
-        }
-           if(isRunning) System.out.print("> ");
+            }
+            if(isRunning) System.out.print("> ");
         }
         scanner.close();
 
