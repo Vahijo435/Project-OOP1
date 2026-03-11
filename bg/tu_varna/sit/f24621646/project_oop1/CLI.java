@@ -26,7 +26,7 @@ private final Map<String, Command> commands=new HashMap<>();
                     if (sp[0].equalsIgnoreCase("exit")) isRunning = false; 
                     cmd.execute(args);
                 }
-            else System.out.println("Непозната команда: " + sp[0]);
+                else System.out.println("Непозната команда: " + sp[0]);
             }
             if(isRunning) System.out.print("> ");
         }
