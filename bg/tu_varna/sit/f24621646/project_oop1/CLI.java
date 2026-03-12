@@ -1,8 +1,8 @@
 package bg.tu_varna.sit.f24621646.project_oop1;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
-
 
 public class CLI {
 private final Map<String, Command> commands=new HashMap<>();
@@ -14,8 +14,9 @@ private final Map<String, Command> commands=new HashMap<>();
     public void start(){
         Scanner scanner=new Scanner(System.in);
         boolean isRunning = true;
-        System.out.print("Database\n> ");
-        while(isRunning && scanner.hasNextLine()){
+        System.out.println("Database");
+        while(isRunning){
+            System.out.print("> ");
             String line = scanner.nextLine().trim();
             if (!line.isEmpty()){
                 String[] sp = line.split("\\s+");
@@ -25,13 +26,9 @@ private final Map<String, Command> commands=new HashMap<>();
                 if(cmd != null){
                     if (sp[0].equalsIgnoreCase("exit")) isRunning = false; 
                     cmd.execute(args);
-                }
-                else System.out.println("Непозната команда: " + sp[0]);
+                } else System.out.println("Unknown command: " + sp[0] + ". Type help to see for available commands.");
             }
-            if(isRunning) System.out.print("> ");
         }
         scanner.close();
-
     }
-
 }
