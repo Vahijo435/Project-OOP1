@@ -9,6 +9,7 @@ private final Map<String, Command> commands=new HashMap<>();
     public CLI() {
         commands.put("help", new HelpCommand());
         commands.put("exit", new ExitCommand());
+        commands.put("open", new OpenCommand());
     }
 
     public void start(){
