@@ -7,27 +7,28 @@ import java.util.Scanner;
 public class CLI {
 private final Map<String, Command> commands=new HashMap<>();
     public CLI() {
-        commands.put("help", new HelpCommand());
         commands.put("exit", new ExitCommand());
         commands.put("open", new OpenCommand());
+        
+
+        Command help = new HelpCommand(commands.values());
+        commands.put(help.getUsage(), help);
     }
 
     public void start(){
         Scanner scanner=new Scanner(System.in);
         boolean isRunning = true;
-        System.out.println("Database");
+        OutputManager.getWriter().write("Database\n");
         while(isRunning){
-            System.out.print("> ");
+            OutputManager.getWriter().write("> ");
             String line = scanner.nextLine().trim();
             if (!line.isEmpty()){
-                String[] sp = line.split("\\s+");
-                Command cmd = commands.get(sp[0].toLowerCase());
-                String[] args=new String[sp.length-1];
-                for(int i=1;i<sp.length;i++) args[i-1]=sp[i];
+                String[] args = line.split("\\s+");
+                Command cmd = commands.get(args[0].toLowerCase());
                 if(cmd != null){
-                    if (sp[0].equalsIgnoreCase("exit")) isRunning = false; 
+                    if (args[0].equalsIgnoreCase("exit")) isRunning = false; 
                     cmd.execute(args);
-                } else System.out.println("Unknown command: " + sp[0] + ". Type help to see for available commands.");
+                } else OutputManager.getWriter().write("Unknown command: " + args[0] + ". Type help to see for available commands.");
             }
         }
         scanner.close();

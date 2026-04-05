@@ -1,29 +1,51 @@
 package bg.tu_varna.sit.f24621646.project_oop1;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-public class OpenCommand implements Command{
+public class OpenCommand implements Command {
 
-   @Override
+    @Override
     public void execute(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Missing file path. Usage: open <file>");
+        if (args.length == 1) {
+            OutputManager.getWriter().write("Missing file path. Usage: open <file>\n");
             return;
         }
-        
-        String filePath = args[0];
-        File file = new File(filePath);
-        
-        try {
 
+        String filePath = args[1];
+        File file = new File(filePath);
+        BufferedReader br = null;
+
+        try {
             if (file.createNewFile()) {
-                System.out.println("Successfully created new file " + file.getName());
-            } else { 
-                System.out.println("Successfully opened: " + file.getName());
+                OutputManager.getWriter().write("Successfully created new file " + file.getName() + "\n");
+            } 
+            br = new BufferedReader(new FileReader(file));
+            OutputManager.getWriter().write("Successfully opened: " + file.getName() + "\n");
+            
+        } catch (IOException e) {
+            throw new RuntimeException("Error opening file: " + e.getMessage());
+        }
+        finally{
+            if(br != null){
+                try{
+                    br.close();
+                }catch(IOException e){
+                    throw new RuntimeException("Unable to close BufferedReader: "+ e.getMessage());
+                }
             }
-        } catch (Exception e) {
-            System.out.println("Error opening file: " + e.getMessage());
         }
     }
-        }
 
+    @Override
+    public String getUsage() {
+        return "open <file>";
+    }
+
+    @Override
+    public String getDescription() {
+        return "opens <file>";
+    }
+}
