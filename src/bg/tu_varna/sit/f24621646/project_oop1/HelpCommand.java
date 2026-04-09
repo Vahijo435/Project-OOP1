@@ -4,15 +4,13 @@ import java.util.Collection;
 
 public class HelpCommand implements Command {
     private final Collection<Command> availableCommands;
+        private String output;
     public HelpCommand(Collection<Command> commands) {
         this.availableCommands = commands;
     }
     @Override
     public void execute(String[] args) {
-        OutputManager.getWriter().write(printCommands());
-    }
-    public String printCommands(){
-        StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
         sb.append("The following commands are supported:\n");
 
         for (Command cmd : availableCommands) {
@@ -22,8 +20,9 @@ public class HelpCommand implements Command {
               .append("\n");
         }
 
-        return sb.toString();
-    } 
+        this.output = sb.toString(); 
+     }
+
  
     @Override
     public String getUsage() { 
@@ -34,5 +33,10 @@ public class HelpCommand implements Command {
     public String getDescription() { 
         return "Shows this help message"; 
     }
+    @Override
+    public String toString() {
+        return output;
+    }
+    
 
 }

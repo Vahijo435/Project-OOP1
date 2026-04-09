@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class OpenCommand implements Command {
-
+    private String output;
     @Override
     public void execute(String[] args) {
         if (args.length == 1) {
-            OutputManager.getWriter().write("Missing file path. Usage: open <file>\n");
+            this.output = "Missing file path. Usage: open <file>"; 
             return;
         }
 
@@ -19,12 +19,12 @@ public class OpenCommand implements Command {
         BufferedReader br = null;
 
         try {
+            StringBuilder sb = new StringBuilder();
             if (file.createNewFile()) {
-                OutputManager.getWriter().write("Successfully created new file " + file.getName() + "\n");
-            } 
-            br = new BufferedReader(new FileReader(file));
-            OutputManager.getWriter().write("Successfully opened: " + file.getName() + "\n");
-            
+                sb.append("Successfully created new file ").append(file.getName()).append("\n");            } 
+                br = new BufferedReader(new FileReader(file));
+                sb.append("Successfully opened: ").append(file.getName());  
+                this.output = sb.toString();          
         } catch (IOException e) {
             throw new RuntimeException("Error opening file: " + e.getMessage());
         }
@@ -47,5 +47,9 @@ public class OpenCommand implements Command {
     @Override
     public String getDescription() {
         return "opens <file>";
+    }
+    @Override
+    public String toString() {
+        return output;
     }
 }
