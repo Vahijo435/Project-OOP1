@@ -41,13 +41,16 @@ public void execute(String[] args) {
 }
             
 
-    @Override public String getUsage() { 
+    @Override 
+    public String getUsage() { 
         return "import <file name>"; 
     }
-    @Override public String getDescription() { 
+    @Override 
+    public String getDescription() { 
         return "Imports a table from a file"; 
     }
-    @Override public String toString() { 
+    @Override 
+    public String toString() { 
         return output; 
     }
 }

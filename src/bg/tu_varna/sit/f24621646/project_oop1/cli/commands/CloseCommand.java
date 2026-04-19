@@ -17,13 +17,16 @@ public class CloseCommand implements Command {
         this.output = "Successfully closed the database. Unsaved changes are lost.";
     }
 
-    @Override public String getUsage() { 
+    @Override 
+    public String getUsage() { 
         return "close"; 
     }
-    @Override public String getDescription() { 
+    @Override 
+    public String getDescription() { 
         return "closes currently opened file"; 
     }
-    @Override public String toString() { 
+    @Override 
+    public String toString() { 
         return output; 
     }
 }
