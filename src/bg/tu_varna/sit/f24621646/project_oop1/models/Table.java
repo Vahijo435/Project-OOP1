@@ -1,10 +1,10 @@
-package bg.tu_varna.sit.f24621646.project_oop1;
+package bg.tu_varna.sit.f24621646.project_oop1.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Table {
-    private final String name;
+    private String name;
     private final List<Column> columns;
     private final List<Row> rows;
 
@@ -28,6 +28,9 @@ public class Table {
 
     public void addColumn(Column column) {
         columns.add(column);
+        for (Row row : rows) {
+            row.addValue(null);
+        }
     }
 
     public void addRow(Row row) {
@@ -36,5 +39,9 @@ public class Table {
 
     public void removeRow(int index) {
         rows.remove(index);
+    }
+
+    public void setName(String newName) {
+    this.name = newName;
     }
 }

@@ -2,9 +2,29 @@ package bg.tu_varna.sit.f24621646.project_oop1;
 
 import java.util.Scanner;
 
+import bg.tu_varna.sit.f24621646.project_oop1.cli.CLI;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.CloseCommand;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.ExitCommand;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.HelpCommand;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.ImportCommand;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.OpenCommand;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.SaveAsCommand;
+import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.SaveCommand;
+
 public class Application {
     public static void main(String[] args) {
         CLI cli = new CLI();
+
+        cli.reg("exit", new ExitCommand());
+        cli.reg("open", new OpenCommand());
+        cli.reg("close", new CloseCommand());
+        cli.reg("save", new SaveCommand());
+        cli.reg("save as", new SaveAsCommand());
+        cli.reg("import", new ImportCommand());
+
+
+        cli.reg("help", new HelpCommand(cli.getCommands()));
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Database");
         boolean isRunning = true;
