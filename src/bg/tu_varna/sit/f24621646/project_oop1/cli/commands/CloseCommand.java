@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621646.project_oop1.cli.commands;
 
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 
 public class CloseCommand implements Command {
@@ -18,13 +19,10 @@ public class CloseCommand implements Command {
     }
 
     @Override 
-    public String getUsage() { 
-        return "close"; 
+    public String getDetails() {
+        return "close - closes currently opened file";
     }
-    @Override 
-    public String getDescription() { 
-        return "closes currently opened file"; 
-    }
+
     @Override 
     public String toString() { 
         return output; 

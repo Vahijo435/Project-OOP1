@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
@@ -49,13 +50,10 @@ public class SaveCommand implements Command {
     }
 
     @Override 
-    public String getUsage() { 
-        return "save"; 
+    public String getDetails() {
+        return "save - saves the currently open file";
     }
-    @Override 
-    public String getDescription() { 
-        return "saves the currently open file"; 
-    }
+
     @Override 
     public String toString() { 
         return output; 

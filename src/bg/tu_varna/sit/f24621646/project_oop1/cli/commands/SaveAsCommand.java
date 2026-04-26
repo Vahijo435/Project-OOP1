@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.f24621646.project_oop1.cli.commands;
 
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 
 public class SaveAsCommand implements Command {
@@ -28,13 +29,10 @@ public class SaveAsCommand implements Command {
     }
 
     @Override 
-    public String getUsage() { 
-        return "save as <file>"; 
+    public String getDetails() {
+        return "save as <file> - saves the currently open file in <file>";
     }
-    @Override 
-    public String getDescription() { 
-        return "saves the currently open file in <file>"; 
-    }
+
     @Override 
     public String toString() { 
         return output; 

@@ -2,6 +2,7 @@ package bg.tu_varna.sit.f24621646.project_oop1.cli.commands;
 
 import java.io.File;
 
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 
 public class ImportCommand implements Command {
@@ -20,8 +21,8 @@ public void execute(String[] args) {
         return;
     }
 
-    String inputPath = args[1]; 
-    
+    String inputPath = args[1];
+
     String fileName = inputPath;
     if (!fileName.endsWith(".txt")) {
         fileName = fileName + ".txt";
@@ -42,13 +43,10 @@ public void execute(String[] args) {
             
 
     @Override 
-    public String getUsage() { 
-        return "import <file name>"; 
+    public String getDetails() {
+        return "import <file name> - Imports a table from a file";
     }
-    @Override 
-    public String getDescription() { 
-        return "Imports a table from a file"; 
-    }
+
     @Override 
     public String toString() { 
         return output; 

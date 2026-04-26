@@ -1,6 +1,8 @@
 package bg.tu_varna.sit.f24621646.project_oop1.cli.commands;
 
-public class ExitCommand implements Command{
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
+
+public class ExitCommand implements Command {
     private String output;
     
     @Override
@@ -10,14 +12,11 @@ public class ExitCommand implements Command{
 
 
     @Override
-    public String getUsage() { 
-        return "exit"; 
+    public String getDetails() {
+        return "exit - exits the program";
     }
 
-    @Override
-    public String getDescription() { 
-        return "exits the program"; 
-    }
+
 
 
     @Override

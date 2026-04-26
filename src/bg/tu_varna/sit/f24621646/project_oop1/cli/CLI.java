@@ -1,23 +1,18 @@
 package bg.tu_varna.sit.f24621646.project_oop1.cli;
 
-import java.util.Map;
+import java.util.*;
 
-import bg.tu_varna.sit.f24621646.project_oop1.cli.commands.Command;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 
 
 public class CLI {
-private final Map<String, Command> commands=new HashMap<>();
+private final Map<String, Command> commands=new LinkedHashMap<>();
 
     public void reg(String name, Command command) {
         commands.put(name.toLowerCase(), command);
     }
-    public Collection<Command> getCommands() {
-        return commands.values();
+    public List<Command> getCommands() {
+        return new ArrayList<>(commands.values());
     }
     private String[] parseArgs(String line) {
     List<String> args = new ArrayList<>();

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 
@@ -55,14 +56,11 @@ public class OpenCommand implements Command {
     }
 
     @Override
-    public String getUsage() {
-        return "open <file>";
+    public String getDetails() {
+        return "open <file> - opens <file>";
     }
 
-    @Override
-    public String getDescription() {
-        return "opens <file>";
-    }
+
 
     @Override
     public String toString() {
