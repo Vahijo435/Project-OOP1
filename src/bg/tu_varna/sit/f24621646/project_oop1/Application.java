@@ -16,6 +16,8 @@ public class Application {
         cli.reg("save as", new SaveAsCommand());
         cli.reg("import", new ImportCommand());
         cli.reg("print", new PrintCommand());
+        cli.reg("describe", new DescribeCommand());
+        cli.reg("showtables", new ShowTablesCommand());
 
         cli.reg("help", new HelpCommand(cli));
 
