@@ -21,8 +21,13 @@ public class OpenCommand implements Command {
             this.output = "Missing file path. Usage: open <file>";
             return;
         }
+        String filePath = args[1];
 
-        String filePath = args[1] + ".txt";
+         if (!filePath.endsWith(".txt")) {
+             filePath = filePath + ".txt";
+         }
+         String fileName = filePath;
+
         File file = new File(filePath);
 
         try {
@@ -43,7 +48,7 @@ public class OpenCommand implements Command {
 
                         String[] parts = line.split(",");
                         if (parts.length == 2) {
-                            String fileName = parts[1].trim();
+                            fileName = parts[1].trim();
                             new ImportCommand().execute(new String[]{"import",fileName});
 
                         }

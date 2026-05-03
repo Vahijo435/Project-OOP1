@@ -18,6 +18,7 @@ public class Application {
         cli.reg("print", new PrintCommand());
         cli.reg("describe", new DescribeCommand());
         cli.reg("showtables", new ShowTablesCommand());
+        cli.reg("insert", new InsertCommand());
 
         cli.reg("help", new HelpCommand(cli));
 
