@@ -1,11 +1,11 @@
-package bg.tu_varna.sit.f24621646.project_oop1.cli;
+package bg.tu_varna.sit.f24621646.project_oop1.invoker;
 
 import java.util.*;
 
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 
 
-public class CLI {
+public class CLInvoker {
 private final Map<String, Command> commands=new LinkedHashMap<>();
 
     public void reg(String name, Command command) {
@@ -25,7 +25,7 @@ private final Map<String, Command> commands=new LinkedHashMap<>();
         if (c == '"') {
             isInQuotes = !isInQuotes;
         } else if (Character.isWhitespace(c) && !isInQuotes) {
-            if (cur.length() > 0) {
+            if (!cur.isEmpty()) {
                 args.add(cur.toString());
                 cur = new StringBuilder();
             }
@@ -33,7 +33,7 @@ private final Map<String, Command> commands=new LinkedHashMap<>();
             cur.append(c);
         }
     }
-   if (cur.length() > 0) {
+   if (!cur.isEmpty()) {
         args.add(cur.toString());
     }
     return args.toArray(new String[0]);
@@ -45,9 +45,8 @@ private final Map<String, Command> commands=new LinkedHashMap<>();
         Command cmd = commands.get(commandName);
 
         if(cmd != null){
-            cmd.execute(args);
-            return cmd.toString();
-        } else return "Unknown command: " + commandName + ". Type help to see for available commands.";
+            return cmd.execute(args);
+        } else return "Непозната команда: " + commandName + ". Напишете help, за да видите наличните команди.";
             }
         }
 

@@ -1,22 +1,19 @@
-package bg.tu_varna.sit.f24621646.project_oop1.cli.commands;
+package bg.tu_varna.sit.f24621646.project_oop1.commands;
 
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 
 public class SaveAsCommand implements Command {
-    private String output;
 
 
     @Override
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         DatabaseManager manager = DatabaseManager.getInstance();
         if (!manager.isDatabaseOpen()) {
-            this.output = "No database is currently open.";
-            return;
+            return "В момента няма отворена база данни.";
         }
         if (args.length < 3) {
-            this.output = "Missing file path. Usage: save as <file>";
-            return;
+            return "Липсващ път към файла. Употреба: "+getUsage();
         }
   
         String newPath = args[2]+".txt";
@@ -25,17 +22,18 @@ public class SaveAsCommand implements Command {
         
         new SaveCommand().execute(new String[]{"save"});
         
-        this.output = "Successfully saved as " + newPath;
+        return "Успешно запазен като " + newPath;
     }
 
     @Override 
-    public String getDetails() {
-        return "save as <file> - saves the currently open file in <file>";
+    public String getUsage() {
+        return "save as <файл>";
     }
 
-    @Override 
-    public String toString() { 
-        return output; 
-
+    @Override
+    public String getDetails(){
+        return "запазва текущо отворения файл на указаното място";
     }
+
+
 }

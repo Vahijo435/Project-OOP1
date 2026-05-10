@@ -1,37 +1,39 @@
 package bg.tu_varna.sit.f24621646.project_oop1.models;
 
+import bg.tu_varna.sit.f24621646.project_oop1.contracts.Value;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Row {
-    private final List<Object> values;
+    private final List<Value> cells;
 
-    public Row(List<Object> values) {
-        this.values = new ArrayList<>(values);
+    public Row(List<Value> cells) {
+        this.cells = new ArrayList<>(cells);
     }
 
-    public Object getValue(int index) {
-        return values.get(index);
+    public Value getValue(int index) {
+        return cells.get(index);
     }
-    public void addValue(Object value) {
-     this.values.add(value);
+    public void addValue(Value value) {
+     this.cells.add(value);
     }
     public String getDisplayValue(int index) {
-        Object val = getValue(index);
+        Value val = getValue(index);
         if (val == null) return "NULL";
-        return val.toString();
+        return val.getAsString();
     }
 
     public int getSize() {
-        return values.size();
+        return cells.size();
     }
 
-    public List<Object> getValues() {
-        return new ArrayList<>(values);
+    public List<Value> getValues() {
+        return new ArrayList<>(cells);
     }
-    public void setValue(int index, Object value) {
-    if (index >= 0 && index < values.size()) {
-        values.set(index, value);
+    public void setValue(int index, Value value) {
+    if (index >= 0 && index < cells.size()) {
+        cells.set(index, value);
     }
 }
 }

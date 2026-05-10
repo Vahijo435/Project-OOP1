@@ -1,42 +1,39 @@
-package bg.tu_varna.sit.f24621646.project_oop1.cli.commands;
+package bg.tu_varna.sit.f24621646.project_oop1.commands;
 import java.util.Set;
 
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 
 public class ShowTablesCommand implements Command {
-    private String output;
-
 
     @Override
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         DatabaseManager manager = DatabaseManager.getInstance();
 
         if (!manager.isDatabaseOpen()) {
-            this.output = "No database is currently open.";
-            return;
+            return "В момента няма отворена база данни.";
         }
 
         Set<String> tableNames = manager.getDatabase().getTables().keySet();
 
         if (tableNames.isEmpty()) {
-            this.output = "No tables have been imported yet.";
+            return "Все още не са импортирани таблици.";
         } else {
             StringBuilder sb = new StringBuilder();
             for (String name : tableNames) {
                 sb.append(name).append("\n");
             }
-            this.output = sb.toString().trim();
+            return sb.toString().trim();
         }
     }
 
 
     @Override
-    public String getDetails() {
-        return "showtables - displays all imported tables";
+    public String getUsage() {
+        return "showtables";
     }
-    @Override 
-    public String toString() { 
-        return output; 
+    public String getDetails(){
+        return "показва всички импортирани таблици";
     }
+
 }

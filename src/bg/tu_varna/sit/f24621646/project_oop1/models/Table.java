@@ -5,17 +5,28 @@ import java.util.List;
 
 public class Table {
     private String name;
+    private String fileName;
     private final List<Column> columns;
     private final List<Row> rows;
 
-    public Table(String name) {
+    public Table(String name, String fileName) {
         this.name = name;
+        this.fileName = fileName;
         this.columns = new ArrayList<>();
         this.rows = new ArrayList<>();
     }
-
     public String getName() {
         return name;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+    public void removeRow(Row row) {
+        this.rows.remove(row);
+    }
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public List<Column> getColumns() {
@@ -35,10 +46,6 @@ public class Table {
 
     public void addRow(Row row) {
         rows.add(row);
-    }
-
-    public void removeRow(int index) {
-        rows.remove(index);
     }
 
     public void setName(String newName) {
