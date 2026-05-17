@@ -6,7 +6,11 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.io.TableFileManager;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
-
+/**
+ * @author Vahan
+ * Команда за импортиране на външна таблица от файл към текущо отворената база от данни.
+ *
+ */
 public class ImportCommand implements Command {
 
 public String execute(String[] args) {
@@ -46,10 +50,10 @@ public String execute(String[] args) {
 
     @Override 
     public String getUsage() {
-        return "import <файл>";
+        return "import <file name>";
     }
     public String getDetails(){
-    return "Импортира таблица от файл";
+    return "Добавя в базата данни нова таблица от файл.";
     }
 
 }

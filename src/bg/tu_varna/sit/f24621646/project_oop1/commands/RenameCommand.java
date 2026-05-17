@@ -5,6 +5,11 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
+/**
+ * @author Vahan
+ * Команда за преименуване на съществуваща таблица в базата данни.
+ *
+ */
 public class RenameCommand implements Command {
 
     @Override

@@ -1,22 +1,11 @@
 package bg.tu_varna.sit.f24621646.project_oop1.manager;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import bg.tu_varna.sit.f24621646.project_oop1.contracts.Value;
-import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
-import bg.tu_varna.sit.f24621646.project_oop1.models.Column;
-import bg.tu_varna.sit.f24621646.project_oop1.models.DataType;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
-import bg.tu_varna.sit.f24621646.project_oop1.models.Row;
-import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
-
+/**
+ * @author Vahan
+ * Singleton клас, управляващ жизнения цикъл на базата данни.
+ * Пази референция към текущо отворената база и пътя към нейния каталожен файл,предоставяйки глобална точка за достъп до тях.
+ */
 public class DatabaseManager {
     private static DatabaseManager instance = null;
     private Database currentDatabase = null;

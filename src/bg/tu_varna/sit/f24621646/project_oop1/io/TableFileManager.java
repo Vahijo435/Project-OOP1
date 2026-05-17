@@ -7,7 +7,12 @@ import bg.tu_varna.sit.f24621646.project_oop1.models.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Vahan
+ * Клас, отговорен за входно-изходните операции на индивидуални таблици.
+ * Реализира логиката за четене от файл и записване на структурата и редовете във файл.
+ *
+ */
 public class TableFileManager {
     public static void loadTable(String filePath, String tableName, Database database) {
         File file = new File(filePath);
@@ -80,7 +85,12 @@ public class TableFileManager {
 
             for (Row row : table.getRows()) {
                 for (int i = 0; i < columns.size(); i++) {
-                    bw.write(row.getDisplayValue(i));
+                    Object raw = row.getValue(i).getRawValue();
+                    if (raw == null) {
+                        bw.write("NULL");
+                    } else {
+                        bw.write(raw.toString());
+                    }
                     if (i < columns.size() - 1) {
                         bw.write(" | ");
                     }
@@ -88,7 +98,7 @@ public class TableFileManager {
                 bw.newLine();
             }
         } catch (IOException e) {
-            throw new DatabaseException("Записът на таблицата неуспешно: " + e.getMessage());
+            throw new DatabaseException("Записът на таблицата е неуспешно: " + e.getMessage());
         }
 
     }

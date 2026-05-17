@@ -5,7 +5,11 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Column;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
-
+/**
+ * @author Vahan
+ * Команда, която извежда информация за структурата на дадена таблица - списък с имената на нейните колони и техните типове данни.
+ *
+ */
 public class DescribeCommand implements Command {
 
     @Override
@@ -41,7 +45,7 @@ public class DescribeCommand implements Command {
         sb.append("Структура на таблица '").append(tableName).append("':\n");
         
         for (Column col : columns) {
-            sb.append("- ").append(col.getName()).append(" : ").append(col.getType().toString()).append("\n");
+            sb.append(col.getName()).append(" : ").append(col.getType().toString()).append("\n");
         }
 
         return sb.toString().trim();
@@ -49,7 +53,7 @@ public class DescribeCommand implements Command {
 
     @Override 
     public String getUsage() {
-        return "describe <таблица>";
+        return "describe <name>";
     }
     public String getDetails() {
         return "Показва информация за типовете колони в дадена таблица";

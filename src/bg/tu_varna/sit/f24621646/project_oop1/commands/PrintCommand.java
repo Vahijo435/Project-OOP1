@@ -5,7 +5,11 @@ import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.io.TableRenderer;
-
+/**
+ * @author Vahan
+ * Команда за отпечатване на цялото съдържание на дадена таблица в конзолата.
+ *
+ */
 public class PrintCommand implements Command {
     @Override
     public String execute(String[] args) {
@@ -16,12 +20,12 @@ public class PrintCommand implements Command {
         Table table = manager.getDatabase().getTable(args[1]);
         if (table == null) return "Таблица '" + args[1] + "' не беше намерена.";
 
-        return TableRenderer.render(table.getColumns(), table.getRows());
+        return TableRenderer.renderPaged(table.getColumns(), table.getRows());
     }
 
     @Override
     public String getUsage() {
-        return "print <таблица>";
+        return "print <name>";
     }
     @Override
     public String getDetails(){

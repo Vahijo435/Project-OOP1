@@ -14,7 +14,12 @@ import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 
-
+/**
+ * @author Vahan
+ * Команда за запазване на всички направени промени в текущата база от данни.
+ * Презаписва каталожния файл и файловете на всички заредени таблици.
+ *
+ */
 public class SaveCommand implements Command {
 
 

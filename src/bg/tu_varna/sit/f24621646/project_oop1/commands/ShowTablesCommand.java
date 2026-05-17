@@ -3,7 +3,12 @@ import java.util.Set;
 
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
-
+/**
+ * @author Vahan
+ * Команда, която извежда списък с имената на всички таблици,
+ * които са заредени в текущо отворената база от данни.
+ *
+ */
 public class ShowTablesCommand implements Command {
 
     @Override
@@ -33,7 +38,7 @@ public class ShowTablesCommand implements Command {
         return "showtables";
     }
     public String getDetails(){
-        return "показва всички импортирани таблици";
+        return "Показва списък с имената на всички заредени таблици";
     }
 
 }

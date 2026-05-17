@@ -11,7 +11,12 @@ import bg.tu_varna.sit.f24621646.project_oop1.models.Column;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Row;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
-
+/**
+ * @author Vahan
+ * Команда за добавяне на нов ред в дадена таблица.
+ * Валидира броя и типа на подадените стойности преди добавяне.
+ *
+ */
 public class InsertCommand implements Command {
 
     @Override
@@ -68,7 +73,7 @@ public class InsertCommand implements Command {
 
     @Override 
     public String getUsage() {
-        return "insert <таблица> <стойност1> <стойност2> ... <стойностN>";
+        return "insert <table name> <column 1> ... <column n>";
     }
     public String getDetails(){
         return "Вмъква нов ред с посочените стойности в таблицата";

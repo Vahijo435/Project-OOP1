@@ -5,7 +5,12 @@ import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 
 import java.io.*;
-
+/**
+ * @author Vahan
+ * Клас, отговорен за управлението на каталожния файл на базата данни.
+ * Чете и записва списъка с всички таблици и пътищата към техните файлове.
+ *
+ */
 public class CatalogFileManager {
     public static void readCatalog(String catalogPath, Database database) {
         File catalogFile = new File(catalogPath);

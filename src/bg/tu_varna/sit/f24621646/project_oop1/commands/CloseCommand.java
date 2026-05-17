@@ -2,7 +2,12 @@ package bg.tu_varna.sit.f24621646.project_oop1.commands;
 
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
-
+/**
+ * @author Vahan
+ * Команда за затваряне на текущо отворената база от данни.
+ * Изчиства паметта, като всички незапазени промени се губят.
+ *
+ */
 public class CloseCommand implements Command {
 
     @Override

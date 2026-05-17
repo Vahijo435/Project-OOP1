@@ -4,7 +4,12 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Value;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Vahan
+ * Клас, представляващ един ред в таблицата.
+ * Съдържа списък от стойности, които отговарят на колоните в таблицата.
+ *
+ */
 public class Row {
     private final List<Value> cells;
 
