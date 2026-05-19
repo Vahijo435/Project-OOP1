@@ -62,8 +62,8 @@ public class AggregateCommand implements Command {
         }
 
         int colCount = table.getColumns().size();
-        if (searchCol < 0 || searchCol >= colCount) return "Невалиден индекс за търсеща колона.";
-        if (targetCol < 0 || targetCol >= colCount) return "Невалиден индекс за целева колона.";
+        if (searchCol < 0 || searchCol >= colCount) return "Невалиден номер за търсеща колона.";
+        if (targetCol < 0 || targetCol >= colCount) return "Невалиден номер за целева колона.";
 
 
 

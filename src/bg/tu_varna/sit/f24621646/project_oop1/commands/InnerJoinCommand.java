@@ -36,13 +36,13 @@ public class InnerJoinCommand implements Command {
             col1 = Integer.parseInt(args[2])-1;
             col2 = Integer.parseInt(args[4])-1;
         } catch (NumberFormatException e) {
-            throw new DatabaseException("Индексите на колоните трябва да бъдат цели числа."+ e.getMessage());
+            throw new DatabaseException("Номерата на колоните трябва да бъдат цели числа."+ e.getMessage());
         }
         if (col1 < 0 || col1 >= t1.getColumns().size()) {
-            return "Невалиден индекс за първата таблица '" + t1.getName() + "'.";
+            return "Невалиден номер за първата таблица '" + t1.getName() + "'.";
         }
         if (col2 < 0 || col2 >= t2.getColumns().size()) {
-            return "Невалиден индекс за втората таблица '" + t2.getName() + "'.";
+            return "Невалиден номер за втората таблица '" + t2.getName() + "'.";
         }
             String newName = t1.getName() + "_" + t2.getName() + "_join";
             if (manager.getDatabase().hasTable(newName)) {

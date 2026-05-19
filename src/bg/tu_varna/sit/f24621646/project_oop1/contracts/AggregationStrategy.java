@@ -8,5 +8,9 @@ import java.util.List;
  *
  */
 public interface AggregationStrategy {
+    /**
+     * Изчислява математическа стойност въз основа на списък от числа.
+     *
+     */
     double calculate(List<Double> values);
 }

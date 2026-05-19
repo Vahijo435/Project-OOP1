@@ -60,8 +60,10 @@ public class Application {
 
 
 
-
-
+    /**
+     * Помощен метод за извеждане на текст в конзолата без преминаване на нов ред.
+     *
+     */
     public static void display(String s){
         System.out.print(s);
     }

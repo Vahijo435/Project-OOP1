@@ -10,12 +10,21 @@ public class NextCommand implements Command {
     private int currentPage=1;
     private final int totalPages;
 
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
 
+    /**
+     * Инициализира командата с максималния брой страници.
+     *
+     */
     public NextCommand(int totalPages) {
         this.totalPages = totalPages;
+    }
+
+    /**
+     * Задава текущата страница.
+     *
+     */
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
 
     @Override

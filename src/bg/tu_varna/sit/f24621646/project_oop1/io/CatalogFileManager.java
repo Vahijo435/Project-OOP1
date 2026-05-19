@@ -12,6 +12,10 @@ import java.io.*;
  *
  */
 public class CatalogFileManager {
+    /**
+     * Чете каталожен файл и зарежда таблиците в подадената база от данни.
+     *
+     */
     public static void readCatalog(String catalogPath, Database database) {
         File catalogFile = new File(catalogPath);
         if (!catalogFile.exists()) {
@@ -35,7 +39,10 @@ public class CatalogFileManager {
         }
     }
 
-
+    /**
+     * Записва информацията за таблиците на подадената база от данни в каталожен файл.
+     *
+     */
     public static void writeCatalog(String catalogPath, Database database) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(catalogPath))) {
             for (Table table : database.getTables().values()) {

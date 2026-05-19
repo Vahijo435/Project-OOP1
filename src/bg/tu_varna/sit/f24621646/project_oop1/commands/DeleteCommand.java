@@ -36,7 +36,7 @@ public class DeleteCommand implements Command {
         try {
             searchColIndex = Integer.parseInt(args[2])-1;
         } catch (NumberFormatException e) {
-            throw new DatabaseException("Грешка: Индексът на колоната трябва да бъде число." + e.getMessage());
+            throw new DatabaseException("Номерът на колоната трябва да бъде число." + e.getMessage());
         }
 
         if (searchColIndex < 0 || searchColIndex >= table.getColumns().size()) {

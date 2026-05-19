@@ -8,7 +8,17 @@ import bg.tu_varna.sit.f24621646.project_oop1.models.DataType;
  *
  */
 public interface Value {
+    /**
+     * Връща типа на данните за текущата стойност.
+     * Обект от тип DataType (INTEGER, DOUBLE, STRING).
+     */
     DataType getType();
+    /**
+     * Връща текстово  представяне на стойността (форматирано за извеждане) в клетката.
+     */
     String getAsString();
+    /**
+     * Връща обектната реална стойност в нейния оригинален Java тип. (Integer, Double, String или null).
+     */
     Object getRawValue();
 }

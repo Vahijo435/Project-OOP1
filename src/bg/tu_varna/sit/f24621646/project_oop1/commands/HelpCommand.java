@@ -10,7 +10,10 @@ import bg.tu_varna.sit.f24621646.project_oop1.invoker.CLInvoker;
  */
 public class HelpCommand implements Command {
     private final CLInvoker cli;
-
+    /**
+     * Инициализира командата с референция към инвокъра, за да може да достъпи всички регистрирани команди.
+     *
+     */
     public HelpCommand(CLInvoker cli) {
         this.cli = cli;
 

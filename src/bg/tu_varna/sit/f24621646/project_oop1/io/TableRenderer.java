@@ -16,7 +16,10 @@ import java.util.Scanner;
  *
  */
 public class TableRenderer {
-
+    /**
+     * Рендерира таблицата под формата на стринг спрямо максималната дължина на елементите в колоните.
+     *
+     */
     public static String render(List<Column> columns, List<Row> rows) {
         if (columns.isEmpty()) return "Таблицата няма дефинирани колони.";
         if (rows.isEmpty()) return "Таблицата е празна.";
@@ -46,7 +49,10 @@ public class TableRenderer {
 
         return sb.toString().trim();
     }
-
+    /**
+     * Изчислява необходимата визуална ширина на всяка колона спрямо дължината на текста в нея.
+     *
+     */
     private static int[] calculateWidths(List<Column> columns, List<Row> rows) {
         int[] widths = new int[columns.size()];
         for (int i = 0; i < columns.size(); i++) {
@@ -63,6 +69,10 @@ public class TableRenderer {
         }
         return widths;
     }
+    /**
+     * Рендерира таблицата с поддръжка за показване по страници.
+     *
+     */
     public static String renderPaged(List<Column> columns, List<Row> rows) {
         Scanner scanner = new Scanner(System.in);
         if (columns.isEmpty()) return "Таблицата няма дефинирани колони.";

@@ -14,6 +14,11 @@ import java.util.List;
  *
  */
 public class TableFileManager {
+
+    /**
+     * Зарежда данни за конкретна таблица от текстов файл.
+     *
+     */
     public static void loadTable(String filePath, String tableName, Database database) {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -68,7 +73,10 @@ public class TableFileManager {
             throw new DatabaseException("Чененето на таблицата неуспешно: " + e.getMessage());
         }
     }
-
+    /**
+     * Записва съдържанието и структурата на таблица във файл.
+     *
+     */
     public static void saveTable(Table table, String filePath) {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {

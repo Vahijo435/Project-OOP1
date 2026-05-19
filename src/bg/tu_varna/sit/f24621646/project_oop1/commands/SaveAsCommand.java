@@ -21,7 +21,7 @@ public class SaveAsCommand implements Command {
             return "Липсващ път към файла. Употреба: "+getUsage();
         }
 
-        String newPath = args[2];
+        String newPath = args[1];
         if(!newPath.endsWith(".txt")){
             newPath=newPath+".txt";
         }
