@@ -3,6 +3,7 @@ package bg.tu_varna.sit.f24621646.project_oop1.commands;
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Row;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 
@@ -26,22 +27,13 @@ public class DeleteCommand implements Command {
         }
 
         String tableName = args[1];
-        Table table = manager.getDatabase().getTable(tableName);
-
-        if (table == null) {
-            return "Таблицата '" + tableName + "' не съществува.";
+        Database db = manager.getDatabase();
+        if (!db.hasTable(tableName)) {
+            return "Таблица '" + tableName + "' не съществува.";
         }
+        Table table = db.getTable(tableName);
+        int searchColIndex = table.parseColumnIndex(args[2]);
 
-        int searchColIndex;
-        try {
-            searchColIndex = Integer.parseInt(args[2])-1;
-        } catch (NumberFormatException e) {
-            throw new DatabaseException("Номерът на колоната трябва да бъде число." + e.getMessage());
-        }
-
-        if (searchColIndex < 0 || searchColIndex >= table.getColumns().size()) {
-            return "Грешка: Невалиден номер на колона.";
-        }
 
         String searchVal = args[3];
         List<Row> rowsToDelete = table.findRowsByColumnValue(searchColIndex, searchVal);

@@ -4,6 +4,7 @@ import java.util.List;
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Column;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 /**
  * @author Vahan
@@ -27,13 +28,12 @@ public class DescribeCommand implements Command {
         }
 
         String tableName = args[1];
-
-        if (!manager.getDatabase().hasTable(tableName)) {
-            return "Таблицата '" + tableName + "' не същесвува.";
-
+        Database db = manager.getDatabase();
+        if (!db.hasTable(tableName)) {
+            return "Таблица '" + tableName + "' не съществува.";
         }
+        Table table = db.getTable(tableName);
 
-        Table table = manager.getDatabase().getTable(tableName);
         List<Column> columns = table.getColumns();
 
         if (columns.isEmpty()) {

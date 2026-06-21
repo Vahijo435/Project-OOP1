@@ -52,6 +52,7 @@ private final Map<String, Command> commands=new LinkedHashMap<>();
 
             } else if (c == '"') {
                 isInQuotes = !isInQuotes;
+                cur.append(c);
             } else if (Character.isWhitespace(c) && !isInQuotes) {
                 if (!cur.isEmpty()) {
                     args.add(cur.toString());

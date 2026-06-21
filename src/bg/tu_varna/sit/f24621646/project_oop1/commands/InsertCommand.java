@@ -38,7 +38,6 @@ public class InsertCommand implements Command {
 
         if (!db.hasTable(tableName)) {
             return "Таблица '" + tableName + "' не съществува.";
-
         }
 
         Table table = db.getTable(tableName);

@@ -93,12 +93,7 @@ public class TableFileManager {
 
             for (Row row : table.getRows()) {
                 for (int i = 0; i < columns.size(); i++) {
-                    Object raw = row.getValue(i).getRawValue();
-                    if (raw == null) {
-                        bw.write("NULL");
-                    } else {
-                        bw.write(raw.toString());
-                    }
+                    bw.write(row.getValue(i).getAsString());
                     if (i < columns.size() - 1) {
                         bw.write(" | ");
                     }

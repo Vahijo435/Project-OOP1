@@ -4,6 +4,7 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.io.TableFileManager;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 /**
  * @author Vahan
@@ -18,9 +19,12 @@ public class ExportCommand implements Command {
         DatabaseManager manager = DatabaseManager.getInstance();
         if (!manager.isDatabaseOpen()) return "Няма отворена база данни.";
         if (args.length < 3) return "Употреба:"+getUsage();
-
-        Table table = manager.getDatabase().getTable(args[1]);
-        if (table == null) return "Таблица '" + args[1] + "' не съществува.";
+        String tableName=args[1];
+        Database db = manager.getDatabase();
+        if (!db.hasTable(tableName)) {
+            return "Таблица '" + tableName + "' не съществува.";
+        }
+        Table table = db.getTable(tableName);
         String filePath = args[2];
         if(!filePath.endsWith(".txt")){
             filePath=filePath+".txt";

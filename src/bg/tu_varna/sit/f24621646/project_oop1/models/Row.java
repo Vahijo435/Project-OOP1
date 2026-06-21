@@ -39,7 +39,7 @@ public class Row {
      */
     public String getDisplayValue(int index) {
         Value val = getValue(index);
-        if (val == null) return "NULL";
+        if (val == null || val.isNull()) return "NULL";
         return val.getAsString();
     }
     /**

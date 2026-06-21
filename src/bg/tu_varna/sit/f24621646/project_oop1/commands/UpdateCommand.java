@@ -5,6 +5,7 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Value;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.DataType;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Row;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 
@@ -29,30 +30,25 @@ public class UpdateCommand implements Command {
             return "Употреба: "+getUsage();
 
         }
-
-        Table table = manager.getDatabase().getTable(args[1]);
-        if (table == null) {
-            return "Таблицата не съществува.";
-
+        String tableName=args[1];
+        Database db = manager.getDatabase();
+        if (!db.hasTable(tableName)) {
+            return "Таблицата '" + tableName + "' не съществува.";
         }
-        try {
-            int searchCol = Integer.parseInt(args[2])-1;
-            String searchVal = args[3];
-            int targetCol = Integer.parseInt(args[4])-1;
-            String targetVal = args[5];
+        Table table = db.getTable(tableName);
+        int searchCol = table.parseColumnIndex(args[2]);
+        int targetCol = table.parseColumnIndex(args[4]);
+        String searchVal = args[3];
+        String targetVal = args[5];
 
-            DataType targetType = table.getColumns().get(targetCol).getType();
-            Value newTargetValue = targetType.parse(targetVal);
-            List<Row> rowsToUpdate = table.findRowsByColumnValue(searchCol, searchVal);
+        DataType targetType = table.getColumns().get(targetCol).getType();
+        Value newTargetValue = targetType.parse(targetVal);
+        List<Row> rowsToUpdate = table.findRowsByColumnValue(searchCol, searchVal);
 
-            for (Row row : rowsToUpdate) {
-                row.setValue(targetCol, newTargetValue);
-            }
-
-            return "Успешно обновени клетки в " + rowsToUpdate.size()  + " реда.";
-        }catch (NumberFormatException e){
-            throw new DatabaseException("Наборът на колоните трябва да бъдат числа " + e.getMessage());
+        for (Row row : rowsToUpdate) {
+            row.setValue(targetCol, newTargetValue);
         }
+        return "Успешно обновени клетки в " + rowsToUpdate.size()  + " реда.";
     }
 
     @Override

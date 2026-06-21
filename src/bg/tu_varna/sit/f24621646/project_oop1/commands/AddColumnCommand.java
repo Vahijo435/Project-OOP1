@@ -5,6 +5,7 @@ import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Column;
 import bg.tu_varna.sit.f24621646.project_oop1.models.DataType;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 /**
  * @author Vahan
@@ -30,11 +31,11 @@ public class AddColumnCommand implements Command {
         String columnName = args[2];
         String typeStr = args[3].toUpperCase();
 
-        Table table = manager.getDatabase().getTable(tableName);
-        if (table == null) {
+        Database db = manager.getDatabase();
+        if (!db.hasTable(tableName)) {
             return "Таблица '" + tableName + "' не съществува.";
         }
-
+        Table table = db.getTable(tableName);
         try {
             DataType type = DataType.valueOf(typeStr);
             Column newColumn = new Column(columnName, type);

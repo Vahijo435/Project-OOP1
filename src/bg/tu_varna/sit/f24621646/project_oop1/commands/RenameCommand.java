@@ -29,11 +29,11 @@ public class RenameCommand implements Command {
         Database db = manager.getDatabase();
 
         if (!db.hasTable(oldName)) {
-            return "Грешка: Таблица с име '" + oldName + "' не съществува.";
+            return "Таблица с име '" + oldName + "' не съществува.";
         }
 
         if (db.hasTable(newName)) {
-            return "Грешка: Вече съществува таблица с име '" + newName + "'.";
+            return "Вече съществува таблица с име '" + newName + "'.";
         }
 
 

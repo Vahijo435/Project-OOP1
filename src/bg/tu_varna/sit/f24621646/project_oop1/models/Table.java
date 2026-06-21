@@ -2,11 +2,11 @@ package bg.tu_varna.sit.f24621646.project_oop1.models;
 
 import bg.tu_varna.sit.f24621646.project_oop1.contracts.Value;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
+import bg.tu_varna.sit.f24621646.project_oop1.models.types.DoubleValue;
 import bg.tu_varna.sit.f24621646.project_oop1.models.types.NullValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Vahan
@@ -98,32 +98,44 @@ public class Table {
         rows.add(row);
     }
     /**
-     * Намира и връща списък от всички редове, чиято стойност в дадена колона съвпада с подадената търсена стойност.
+     * Намира редовете, чиято стойност съвпада с подадения обект Value. Връща списък от всички редове, чиято стойност в дадена колона съвпада с подадената търсена стойност.
+     * colIndex - Индексът на колоната за търсене.
+     * expectedValue - Стойност за сравняване под формата на Value обект
+     */
+    public List<Row> findRowsByValue(int colIndex, Value expectedValue) {
+        List<Row> matchingRows = new ArrayList<>();
+        for (Row row : rows) {
+            Value cellValue = row.getValue(colIndex);
+            if (cellValue.matches(expectedValue)) {
+                matchingRows.add(row);
+            }
+        }
+        return matchingRows;
+    }
+
+    /**
+     * Парсва низ към Value и търси съвпадения в колоната.
      * colIndex - Индексът на колоната за търсене.
      * rawSearchValue - Търсената стойност под формата на низ.
      */
     public List<Row> findRowsByColumnValue(int colIndex, String rawSearchValue) {
-        if (colIndex < 0 || colIndex >= columns.size()) {
-            throw new DatabaseException("Невалиден номер на колона. Валидните номера са от 1 до " + columns.size());
-        }
-
         Column targetColumn = columns.get(colIndex);
         Value expectedValue;
-        try {
-            expectedValue = targetColumn.getType().parse(rawSearchValue);
-        } catch (Exception e) {
-            throw new DatabaseException("Невалидна стойност за търсене спрямо типа на колоната.");
-        }
 
-        List<Row> matchingRows = new ArrayList<>();
-        for (Row row : rows) {
-            Value cellValue = row.getValue(colIndex);
-            if (Objects.equals(cellValue.getRawValue(), expectedValue.getRawValue())) {
-                matchingRows.add(row);
+        if (rawSearchValue.equalsIgnoreCase("NULL")) {
+            expectedValue = new NullValue();
+        } else if (targetColumn.getType().isNumeric()) {
+            try {
+                double numVal = Double.parseDouble(rawSearchValue);
+                expectedValue = new DoubleValue(numVal);
+            } catch (NumberFormatException e) {
+                throw new DatabaseException("Невалидна числова стойност за търсене: " + rawSearchValue);
             }
+        } else {
+            expectedValue = targetColumn.getType().parse(rawSearchValue);
         }
 
-        return matchingRows;
+        return findRowsByValue(colIndex, expectedValue);
     }
     /**
      * Променя името на таблицата.
@@ -131,5 +143,21 @@ public class Table {
      */
     public void setName(String newName) {
     this.name = newName;
+    }
+
+    /**
+     * Парсва и валидира номер на колона от стринг
+     *
+     */
+    public int parseColumnIndex(String colStr) {
+        try {
+            int index = Integer.parseInt(colStr) - 1;
+            if (index < 0 || index >= columns.size()) {
+                throw new DatabaseException("Невалиден номер на колона. Валидните номера са от 1 до " + columns.size() + ".");
+            }
+            return index;
+        } catch (NumberFormatException e) {
+            throw new DatabaseException("Номерът на колоната трябва да бъде число.");
+        }
     }
 }

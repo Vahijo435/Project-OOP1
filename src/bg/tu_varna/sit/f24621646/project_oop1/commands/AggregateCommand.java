@@ -7,6 +7,7 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Value;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
 import bg.tu_varna.sit.f24621646.project_oop1.models.DataType;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Row;
 import bg.tu_varna.sit.f24621646.project_oop1.models.Table;
 import bg.tu_varna.sit.f24621646.project_oop1.commands.calculations.MaximumStrategy;
@@ -41,35 +42,28 @@ public class AggregateCommand implements Command {
         DatabaseManager manager = DatabaseManager.getInstance();
         if (!manager.isDatabaseOpen()) return "Няма отворена база данни.";
         if (args.length < 6) return "Употреба: " + getUsage();
+        String tableName=args[1];
+        Database db = manager.getDatabase();
+        if (!db.hasTable(tableName)) {
+            return "Таблица '" + tableName + "' не съществува.";
+        }
 
-        Table table = manager.getDatabase().getTable(args[1]);
-        if (table == null) return "Таблица '" + args[1] + "' не съществува.";
+        Table table = db.getTable(tableName);
 
+        int searchCol = table.parseColumnIndex(args[2]);
+        int targetCol = table.parseColumnIndex(args[4]);
 
-        int searchCol;
-        int targetCol;
         String searchVal = args[3];
         String operation = args[5].toLowerCase();
-        try {
-            searchCol = Integer.parseInt(args[2])-1;
-            targetCol = Integer.parseInt(args[4])-1;
-        } catch (NumberFormatException e) {
-            throw new DatabaseException("Номерата на колоните трябва да са цели числа.");
-        }
-        AggregationStrategy strategy = strategies.get(operation);
-        if (strategy == null) {
+
+        if (!strategies.containsKey(operation)) {
             return "Невалидна операция. Използвайте: " + String.join(", ", strategies.keySet());
         }
 
-        int colCount = table.getColumns().size();
-        if (searchCol < 0 || searchCol >= colCount) return "Невалиден номер за търсеща колона.";
-        if (targetCol < 0 || targetCol >= colCount) return "Невалиден номер за целева колона.";
-
-
 
         DataType type = table.getColumns().get(targetCol).getType();
-        if (type != DataType.INTEGER && type != DataType.DOUBLE) {
-            return "Грешка: Целевата колона трябва да е числова (INTEGER или DOUBLE).";
+        if (!type.isNumeric()) {
+            return "Целевата колона трябва да е числова.";
         }
         List<Row> matchingRows = table.findRowsByColumnValue(searchCol, searchVal);
 
@@ -80,20 +74,17 @@ public class AggregateCommand implements Command {
         List<Double> numericValues = new ArrayList<>();
         for (Row row : matchingRows) {
             Value val = row.getValue(targetCol);
-            if (val.getRawValue() == null) continue;
-
-            if (val.getType() == DataType.INTEGER) {
-                numericValues.add(((Integer) val.getRawValue()).doubleValue());
-            } else if (val.getType() == DataType.DOUBLE) {
-                numericValues.add((Double) val.getRawValue());
+            if (val.isNull()) {
+                continue;
             }
+            numericValues.add(val.getAsDouble());
         }
 
         if (numericValues.isEmpty()) {
             return "Няма намерени числови данни за обработка (възможно е целевите клетки да са NULL).";
         }
 
-        double result = strategy.calculate(numericValues);
+        double result = strategies.get(operation).calculate(numericValues);
         return "Резултат (" + operation + "): " + result;
     }
 

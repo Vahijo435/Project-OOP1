@@ -6,6 +6,8 @@ import bg.tu_varna.sit.f24621646.project_oop1.contracts.Command;
 import bg.tu_varna.sit.f24621646.project_oop1.exceptions.DatabaseException;
 import bg.tu_varna.sit.f24621646.project_oop1.io.TableFileManager;
 import bg.tu_varna.sit.f24621646.project_oop1.manager.DatabaseManager;
+import bg.tu_varna.sit.f24621646.project_oop1.models.Database;
+
 /**
  * @author Vahan
  * Команда за импортиране на външна таблица от файл към текущо отворената база от данни.
@@ -31,12 +33,12 @@ public String execute(String[] args) {
     
     File file = new File(fileName);
     if(!file.exists()){
-        return "Указаната таблица не съществува";
+        return "Указаният файл не съществува";
     }
     String tableName = file.getName().replace(".txt", "");
-
     if (manager.getDatabase().hasTable(tableName)) {
-        return "Таблица '" + tableName + "' вече съществува.";
+        return "Вече съществува таблица с име '" + tableName + "'.";
+
     }
 
     try {
@@ -44,7 +46,7 @@ public String execute(String[] args) {
     } catch (Exception e) {
         throw new DatabaseException("Грешка при импорт: " + e.getMessage());
     }
-    return "Успешно импортирана на таблица'" + tableName + "' от " + fileName;
+    return "Успешно импортирана на таблица '" + tableName + "' от " + fileName;
 }
             
 

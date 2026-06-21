@@ -12,13 +12,24 @@ public interface Value {
      * Връща типа на данните за текущата стойност.
      * Обект от тип DataType (INTEGER, DOUBLE, STRING).
      */
-    DataType getType();
+    double getAsDouble();
     /**
      * Връща текстово  представяне на стойността (форматирано за извеждане) в клетката.
      */
     String getAsString();
     /**
-     * Връща обектната реална стойност в нейния оригинален Java тип. (Integer, Double, String или null).
+     * Проверява дали стойността е празна (NULL).
      */
-    Object getRawValue();
+    boolean isNull();
+    /**
+     * Проверява дали стойността е от числов тип (Integer или Double).
+     *
+     */
+    boolean isNumeric();
+    /**
+     * Метод за сравнение на две стойности.
+     * Всеки конкретен тип сам определя правилата за съвпадение.
+     *
+     */
+     boolean matches(Value other);
 }
