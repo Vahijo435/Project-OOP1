@@ -120,21 +120,7 @@ public class Table {
      */
     public List<Row> findRowsByColumnValue(int colIndex, String rawSearchValue) {
         Column targetColumn = columns.get(colIndex);
-        Value expectedValue;
-
-        if (rawSearchValue.equalsIgnoreCase("NULL")) {
-            expectedValue = new NullValue();
-        } else if (targetColumn.getType().isNumeric()) {
-            try {
-                double numVal = Double.parseDouble(rawSearchValue);
-                expectedValue = new DoubleValue(numVal);
-            } catch (NumberFormatException e) {
-                throw new DatabaseException("Невалидна числова стойност за търсене: " + rawSearchValue);
-            }
-        } else {
-            expectedValue = targetColumn.getType().parse(rawSearchValue);
-        }
-
+        Value expectedValue = targetColumn.getType().parse(rawSearchValue);
         return findRowsByValue(colIndex, expectedValue);
     }
     /**
